@@ -12,6 +12,7 @@
         <module>flink-datastream</module>
         <module>flink-sql</module>
         <module>flink-dataset</module>
+        <module>flink-basic</module>
     </modules>
 
     <properties>
