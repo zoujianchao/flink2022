@@ -16,9 +16,18 @@ import java.util.ArrayList;
 public class TransformationApp {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-        map(env);
+//        map(env);
+        rich(env);
     
         env.execute("TransformationApp");
+    }
+    
+    public static void rich(StreamExecutionEnvironment env) {
+        DataStreamSource<String> source = env.readTextFile("data/access.log");
+        env.setParallelism(1);
+        SingleOutputStreamOperator<Access> mapStream = source.map(new PKMapFunction());
+        
+        mapStream.print();
     }
     
     public static void map(StreamExecutionEnvironment env) {
